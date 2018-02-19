@@ -9,7 +9,13 @@ var mongoose = require('./mongoose'),
   expressJwt = require('express-jwt'),
   router = express.Router(),
   cors = require('cors'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  dotenv = require('dotenv');
+
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured
+ */
+dotenv.load({ path: '.env' });
 
 mongoose();
 

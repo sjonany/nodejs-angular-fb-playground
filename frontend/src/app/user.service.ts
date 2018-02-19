@@ -9,7 +9,8 @@ export class UserService {
 
   constructor(private http: AuthHttp) {
     FB.init({
-      appId      : 'YOUR-APP-ID',
+      // TODO(sjoe): Refactor this out.
+      appId      : '187218271876066',
       status     : false, // the SDK will attempt to get info about the current user immediately after init
       cookie     : false,  // enable cookies to allow the server to access
       // the session

@@ -7,8 +7,8 @@ var passport = require('passport'),
 module.exports = function () {
 
   passport.use(new FacebookTokenStrategy({
-      clientID: 'YOUR-FACEBOOK-CLIENT-ID',
-      clientSecret: 'YOUR-FACEBOOK-CLIENT-SECRET'
+      clientID: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
     },
     function (accessToken, refreshToken, profile, done) {
       User.upsertFbUser(accessToken, refreshToken, profile, function(err, user) {
