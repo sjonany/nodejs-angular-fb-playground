@@ -1,8 +1,6 @@
 'use strict';
 
-//mongoose file must be loaded before all other files in order to provide
-// models to other modules
-var mongoose = require('./mongoose'),
+var mongoose = require('mongoose'),
   passport = require('passport'),
   express = require('express'),
   jwt = require('jsonwebtoken'),
@@ -17,17 +15,24 @@ var mongoose = require('./mongoose'),
  */
 dotenv.load({ path: '.env' });
 
-mongoose();
+// Connect to MongoDB.
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/fb-demo');
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('MongoDB connection error. Please make sure MongoDB is running.');
+  process.exit();
+});
 
-var User = require('mongoose').model('User');
+const User = require('./models/user');
 var passportConfig = require('./passport');
 
-//setup configuration for facebook login
+// Setup configuration for facebook login
 passportConfig();
 
 var app = express();
 
-// enable cors
+// Enable CORS
 var corsOption = {
   origin: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -36,7 +41,7 @@ var corsOption = {
 };
 app.use(cors(corsOption));
 
-//rest API requirements
+// REST API requirements
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -80,7 +85,7 @@ router.route('/auth/facebook')
     next();
   }, generateToken, sendToken);
 
-//token handling middleware
+// Token handling middleware
 var authenticate = expressJwt({
   secret: 'my-secret',
   requestProperty: 'auth',
