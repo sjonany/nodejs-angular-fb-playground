@@ -9,7 +9,7 @@ const passport = require('passport');
  * Callback after facebook auth. Send JWT back to client.
  */
 exports.authFacebook = function(req, res) {
-    // See config/auth.js. This callback is called after
+    // See passport.js. This callback is called after
     // the strategy's callback has been invoked.
     // That's where req.user gets populated.
     if (!req.user) {
