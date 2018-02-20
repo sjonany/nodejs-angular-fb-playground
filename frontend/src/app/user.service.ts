@@ -30,7 +30,7 @@ export class UserService {
                 if (token) {
                   localStorage.setItem('id_token', token);
                 }
-                resolve(response.json());
+                resolve();
               })
               .catch(() => reject());
         } else {
@@ -52,7 +52,7 @@ export class UserService {
 
   getCurrentUser() {
     return new Promise((resolve, reject) => {
-      return this.http.get(`http://localhost:3000/api/v1/auth/me`).toPromise().then(response => {
+      return this.http.get(`http://localhost:3000/api/v1/me`).toPromise().then(response => {
         resolve(response.json());
       }).catch(() => reject());
     });

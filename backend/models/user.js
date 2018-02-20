@@ -16,6 +16,7 @@ const UserSchema = new Schema({
       id: String,
       token: String
     },
+
     // This field by default won't be returned in query results unless
     // Explicitly asked for.
     select: false
