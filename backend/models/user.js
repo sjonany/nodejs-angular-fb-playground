@@ -3,6 +3,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const TodoItem = new mongoose.Schema({
+  priority: Number,
+  content: String
+}, { timestamps: true });
+
 const UserSchema = new Schema({
   firstName: {type: String},
   lastName: {type: String},
@@ -11,12 +16,15 @@ const UserSchema = new Schema({
     trim: true, unique: true,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   },
+  todoItems: {
+    type: [TodoItem],
+    select: false
+  },
   facebookProvider: {
     type: {
       id: String,
       token: String
     },
-
     // This field by default won't be returned in query results unless
     // Explicitly asked for.
     select: false

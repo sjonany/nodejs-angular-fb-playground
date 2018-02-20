@@ -3,17 +3,24 @@
 const express = require('express');
 const expressJwt = require('express-jwt');
 const passport = require('passport');
-const Me = require('./me');
-const Auth = require('./auth');
 const router = express.Router();
 
+// Models
 const User = require('../models/user');
+
+// App logic
+const Auth = require('./auth');
+const Me = require('./me');
+const Todo = require('./todo');
+
 module.exports = function(app) {
   // Set the base URL
   app.use('/api/v1', router);
 
   // App APIs.
   router.route('/me').get(authenticate, getCurrentUser, Me.getMe);
+  router.route('/todo').get(authenticate, getCurrentUser, Todo.getTodos);
+  router.route('/todo').post(authenticate, getCurrentUser, Todo.addTodo);
 
   // Facebook login
   router.route('/auth/facebook').post(
@@ -42,9 +49,16 @@ var getCurrentUser = function(req, res, next) {
     if (err) {
       next(err);
     } else {
+      console.log('get current user returned %s', user);
       req.user = user;
       next();
     }
   });
 };
+
+// Helper for debugging. Bypass the auth->getCurrentUser flow.
+var getHardcodedCurrentUser = function(req, res, next) {
+  req.auth = {id : "5a8b2c3cc1a8494e0ff051ab"};
+  getCurrentUser(req, res, next);
+}
 
