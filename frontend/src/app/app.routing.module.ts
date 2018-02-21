@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { AnonymousGuard } from './anonymous.guard';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodolistComponent } from './todolist/todolist.component';
 
 const appRoutes: Routes = [
     {
@@ -14,6 +15,11 @@ const appRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'todo',
+        component: TodolistComponent,
         canActivate: [AuthGuard]
     },
     { path: '', redirectTo: 'welcome' , pathMatch: 'full' }

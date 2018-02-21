@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AppRoutingModule } from './app.routing.module';
+import { TodolistComponent } from './todolist/todolist.component';
 
 export function getAuthHttp(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -24,7 +25,8 @@ export function getAuthHttp(http: Http) {
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    TodolistComponent
   ],
   imports: [
     BrowserModule,
