@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AppRoutingModule } from './app.routing.module';
 import { TodolistComponent } from './todolist/todolist.component';
+import { TodoService } from './todo.service';
 
 export function getAuthHttp(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -41,7 +42,8 @@ export function getAuthHttp(http: Http) {
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,
-      deps: [Http]
+      deps: [Http],
+      providers: [TodoService]
     }
   ],
   bootstrap: [AppComponent]
