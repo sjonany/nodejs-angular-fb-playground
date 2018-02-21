@@ -25,9 +25,7 @@ exports.getTodos = function (req, res) {
  * @param todo_content (string)
  */
 exports.addTodo = function (req, res) {
-  console.log('addTodo req content = %s user id = %s', req.todo_content, req.user.id);
-  req.todo_content = 'test content 2';
-  var newTodoItem = {priority: 1, content: req.todo_content};
+  var newTodoItem = {priority: 1, content: req.body.todo_content};
   User.findOneAndUpdate(
     {_id: req.user.id },
     { $push: {todoItems: newTodoItem} },
@@ -36,7 +34,6 @@ exports.addTodo = function (req, res) {
         console.log('Failed to add todos: %s', err);
         return res.send(500, 'Failed to add todos.')
       }
-      console.log('added todo %s', result);
       res.end();
     });
 };

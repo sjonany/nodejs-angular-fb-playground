@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     this.userService.fbLogin().then(() => {
       console.log('User has been logged in');
       this.router.navigate(['/dashboard']);
-    });  }
+    });
+  }
 
 }

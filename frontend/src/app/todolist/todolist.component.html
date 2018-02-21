@@ -2,3 +2,12 @@
   TODO list:
   <li *ngFor="let todo of todos">{{todo.content}}</li>
 </div>
+
+<div>
+  <label>New item:
+    <input [(ngModel)]="newTodoContent" placeholder="new content">
+  </label>
+  <button class="btn" (click)="submit()">
+    Submit
+  </button>
+</div>
