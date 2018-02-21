@@ -9,15 +9,14 @@ const User = require('../models/user');
  * @return json representation of all the todo items.
  */
 exports.getTodos = function (req, res) {
-  User.find(
+  User.findOne(
     { _id: req.user.id },
     { todoItems: 1 }, function(err, result) {
     if (err) {
       console.log('Failed to get todos: %s', err);
       return res.send(500, 'Failed to get todos.');
     }
-    console.log('todo items = %s', result);
-    res.json(result);
+    res.json(result.toObject().todoItems);
   });
 };
 

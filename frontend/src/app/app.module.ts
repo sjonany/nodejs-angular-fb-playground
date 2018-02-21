@@ -39,11 +39,11 @@ export function getAuthHttp(http: Http) {
   ],
   providers: [
     UserService,
+    TodoService,
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,
-      deps: [Http],
-      providers: [TodoService]
+      deps: [Http]
     }
   ],
   bootstrap: [AppComponent]

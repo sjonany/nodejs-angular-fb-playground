@@ -3,10 +3,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TodoItem = new mongoose.Schema({
+const TodoItem = new Schema({
   priority: Number,
   content: String
 }, { timestamps: true });
+TodoItem.set('toJSON', {getters: true, virtuals: true});
 
 const UserSchema = new Schema({
   firstName: {type: String},
